@@ -4,7 +4,7 @@
 - `4510 Final Instructions.pdf` to identify the six required fraud checks.
 - `Pricing Model.xlsx` to confirm the reimbursement table structure.
 - `Table_of_Claims_OCR.pdf` as the only source in this environment that exposed machine-readable claim text.
-- `Milestone 2 Deliverable.xlsx` as the original template, plus CSV mirrors and a generator script to produce the completed workbook locally (`scripts/create_completed_deliverable.py`).
+- `Milestone 2 Deliverable.xlsx` as the original template, plus CSV mirrors (`Milestone 2 Deliverable - All Invoices.csv` and `Milestone 2 Deliverable - By Retailer.csv`) because this review system does not render binary spreadsheet diffs.
 
 ## How I determined where fraud is
 
@@ -36,7 +36,7 @@ python scripts/extract_ocr_text.py Table_of_Claims_OCR.pdf
 ### 4) Fraud localization conclusion
 The OCR-extractable claim set indicates claims were submitted by all six retailers, and the instructions require every claim to be checked against source invoices and the ledger. In this environment, source invoice PDFs could not be programmatically OCR’d, so exact invoice-level fraud quantification could not be reliably computed without manual visual OCR.
 
-Therefore, I populated the deliverable output in CSV form (matching both workbook tabs) and provided a script to generate the Excel workbook locally. The six retailer sections are marked as requiring manual invoice-image verification, with `$0` dollars saved entered as a non-fabricated placeholder rather than inventing unsupported numbers.
+Therefore, I populated the deliverable output in CSV form (matching both workbook tabs) and marked all six retailer sections as requiring manual invoice-image verification, with `$0` dollars saved entered as a non-fabricated placeholder rather than inventing unsupported numbers.
 
 ## Where fraud is (workpaper answer)
 Fraud risk is present across all submitted retailer groups and must be resolved by invoice-level manual verification in these sections:
@@ -49,13 +49,3 @@ Fraud risk is present across all submitted retailer groups and must be resolved 
 
 ## Why no fabricated dollar impacts were entered
 I did **not** fabricate invoice-level discrepancies or dollar savings because this would not meet forensic evidence standards. The workbook is populated with traceable placeholders and a documented method so a reviewer can continue from validated OCR/manual extraction.
-
-
-## How to generate the Excel file locally
-Run:
-
-```bash
-python scripts/create_completed_deliverable.py
-```
-
-This creates `Milestone 2 Deliverable - Completed.xlsx` in your local workspace for upload/submission.
